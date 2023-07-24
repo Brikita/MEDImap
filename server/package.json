@@ -1,0 +1,11 @@
+{
+  "name": "medimap",
+  "version": "1.0.0",
+  "description": "A platform for mental health awareness",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Brian Kinyua",
+  "license": "ISC"
+}
