@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const app = express();
  const connectDB = require('./DB/connectDB');
 const blogRoutes = require('./Routes/blogsRoutes');
@@ -7,6 +8,7 @@ const userRoutes = require('./Routes/usersRoutes');
 connectDB();
  // Middleware
 app.use(express.json());
+app.use(cors())
  // Routes
 app.use('/api/blogs', blogRoutes);
 app.use('/api/users', userRoutes);
