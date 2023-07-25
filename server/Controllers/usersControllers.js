@@ -1,9 +1,10 @@
-const User = require('./User');
+const bcrypt = require('bcrypt')
+const User = require('../Models/Users');
 
 //get all professionals
 const getUsersByRole = async (req, res) => {
     try {
-        const users = await User.find({ role: 'professional' });
+        const users = await User.find({ roles: 'professional' });
         res.json(users);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve users' });
@@ -27,11 +28,18 @@ const createUser = async (req, res) => {
     const { firstName, lastName, email, password, roles } = req.body;
 
     try {
+        // Generate a salt to use for hashing the password
+        const salt = await bcrypt.genSalt(10);
+
+        // Hash the user's password using the generated salt
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Create a new user instance with the hashed password
         const newUser = new User({
             firstName,
             lastName,
             email,
-            password,
+            password: hashedPassword,
             roles,
         });
 
