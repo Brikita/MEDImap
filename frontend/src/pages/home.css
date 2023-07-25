@@ -1,0 +1,32 @@
+.home-page {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+}
+ .home-page .homepageContent h1 {
+  font-size: 6rem;
+  margin: 0 auto;
+  padding: 10px;
+}
+ .home-page .homepageContent p {
+  padding: 20px;
+  font-size: 2rem;
+}
+ @media screen and (max-width: 768px) {
+  .home-page {
+    grid-template-columns: 1fr;
+  }
+   .home-page .homepageContent h1 {
+    font-size: 4rem;
+  }
+   .home-page .homepageContent p {
+    font-size: 1.5rem;
+  }
+}
+ @media screen and (max-width: 480px) {
+  .home-page .homepageContent h1 {
+    font-size: 3rem;
+  }
+   .home-page .homepageContent p {
+    font-size: 1.2rem;
+  }
+}
