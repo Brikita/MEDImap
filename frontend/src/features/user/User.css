@@ -1,0 +1,18 @@
+.prof-container {
+    margin-bottom: 10px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: aqua;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px ;
+}
+
+.prof-container-img img {
+    margin: 0.5rem;
+    display: inline-block;
+}
