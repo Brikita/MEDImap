@@ -7,16 +7,16 @@ const {getAllBlogs,
 // define blog endpoints
 
 //get all blogs
-router.get('/blogs', getAllBlogs)
+router.get('/', getAllBlogs)
 
 
 //get one blog with the author
-router.get('/blogs/:blog_id', getBlogById)
+router.get('/:blog_id', getBlogById)
 
 
 
 //post a blog
-router.post('/blogs', postBlog)
+router.post('/blog', postBlog)
 
 
 
