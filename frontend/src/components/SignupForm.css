@@ -73,7 +73,9 @@
     gap: 6px;
   }
 
-
+.professional {
+    color: whitesmoke;
+}
   
   .form label {
     position: relative;
