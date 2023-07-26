@@ -1,8 +1,13 @@
 import React from 'react'
+import Professionals from '../features/user/Professionals'
 
 const profile = () => {
   return (
-    <div>profile</div>
+    <div>profile
+
+      <Professionals />
+    </div>
+
   )
 }
 
