@@ -4,7 +4,7 @@ const HomePageText = () => {
   return (
     <div className='homepageContent'>
         <h1>Mental Health Awareness</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur animi doloribus omnis dolores aut, illum blanditiis quibusdam ab culpa minus doloremque voluptas eligendi rem quas vero voluptatum sed laudantium. Quaerat!</p>
+        <p>You don't have to control your thoughts, you just have to stop letting them control you. Mental illness is not a personal failure. Check in with your emotional well-being.</p>
     </div>
   )
 }

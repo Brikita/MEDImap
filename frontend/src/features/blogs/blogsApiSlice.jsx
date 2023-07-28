@@ -1,68 +1,76 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/ApiSlice";
 
-const blogsAdapter = createEntityAdapter({})
+const fourHoursInMilliseconds = 4 * 60 * 60 * 1000;
+const blogsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return dateB - dateA;
+  },
+  keepUnusedDataFor: fourHoursInMilliseconds,
+});
 
 const initialState = blogsAdapter.getInitialState()
 
 export const blogsApiSlice = apiSlice.injectEndpoints({
-    endpoints: builder => ({
-        getBlogs: builder.query({
-            query: () => '/blogs',
-            validateStatus: (response, result) => {
-                return response.status === 200 && !result.isError;
-            },
-            transformResponse: responseData => {
-                const loadedBlogs = responseData.map(blog => {
-                    blog.id = blog._id;
-                    return blog;
-                });
-                return blogsAdapter.setAll(initialState, loadedBlogs);
-            },
-            providesTags: (result, error, arg) => {
-                if (result.ids) {
-                    return [
-                        { type: 'Blog', id: 'LIST' },
-                        ...result.ids.map(id => ({ type: 'Blog', id })),
-                    ];
-                } else return [{ type: 'Blog', id: 'LIST' }];
-            },
-        }),
-        createBlog: builder.mutation({
-            query: blog => ({
-                url: '/blogs',
-                method: 'POST',
-                body: blog,
-            }),
-            invalidatesTags: [{ type: 'Blog', id: 'LIST' }],
-        }),
-        deleteBlog: builder.mutation({
-            query: blogId => ({
-                url: `/blogs/${blogId}`,
-                method: 'DELETE',
-            }),
-            invalidatesTags: [{ type: 'Blog', id: 'LIST' }],
-        }),
+  endpoints: builder => ({
+    getBlogs: builder.query({
+      query: () => '/blogs',
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError;
+      },
+      transformResponse: responseData => {
+        const loadedBlogs = responseData.map(blog => {
+          blog.id = blog._id;
+          return blog;
+        });
+        return blogsAdapter.setAll(initialState, loadedBlogs);
+      },
+      providesTags: (result, error, arg) => {
+        if (result.ids) {
+          return [
+            { type: 'Blog', id: 'LIST' },
+            ...result.ids.map(id => ({ type: 'Blog', id })),
+          ];
+        } else return [{ type: 'Blog', id: 'LIST' }];
+      },
     }),
+    createBlog: builder.mutation({
+      query: blog => ({
+        url: '/blogs',
+        method: 'POST',
+        body: blog,
+      }),
+      invalidatesTags: [{ type: 'Blog', id: 'LIST' }],
+    }),
+    deleteBlog: builder.mutation({
+      query: blogId => ({
+        url: `/blogs/${blogId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'Blog', id: 'LIST' }],
+    }),
+  }),
 });
 
-export const { 
-    useGetBlogsQuery,
-    useCreateBlogMutation,
-    useDeleteBlogMutation,
- } = blogsApiSlice
+export const {
+  useGetBlogsQuery,
+  useCreateBlogMutation,
+  useDeleteBlogMutation,
+} = blogsApiSlice
 
 export const selectblogsResult = blogsApiSlice.endpoints.getBlogs.select()
 
 const selectBlogsData = createSelector(
-    selectblogsResult,
-    blogsResult => blogsResult.data
+  selectblogsResult,
+  blogsResult => blogsResult.data
 )
 
 export const {
-    selectAll: selectAllBlogs,
-    selectById: selectBlogsById,
-    selectIds: selectBlogsIds,
+  selectAll: selectAllBlogs,
+  selectById: selectBlogsById,
+  selectIds: selectBlogsIds,
 } = blogsAdapter.getSelectors(state => selectBlogsData(state) ?? initialState)
 
 

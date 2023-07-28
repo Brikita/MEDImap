@@ -13,23 +13,24 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+html {
+  background-color: plum;
 
-html, body {
+}
+
+body {
   height: 100vh;
+  padding:0 0 ;
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
   align-content: space-between;
   position: relative;
-  background-color: plum;
+  text-align: center;
 }
 
-.header {
-  margin-bottom: 50px;
-}
 
 .footer {
-  position: fixed;
-  bottom: 0;
   width: 100vw;
 }
 
@@ -47,18 +48,92 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+h1.home-H1 {
+  margin-top: 0;
+  margin-bottom: 0.25em;
 
 }
 
+.home-container{
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  background-color: plum;
+  gap: 10px;
+
+}
+
+.blog-container {
+  background-color: aliceblue;
+  margin: 10px 0;
+  padding: 1rem;
+}
+
+.blog-container h2 {
+  font-size: 2rem;
+}
+
+.user-container {
+  max-height: 80vh;
+  overflow: scroll;
+  background-color: #242424;
+  align-content: center;
+}
+
+.user-container h2 {
+  color: whitesmoke;
+  margin-block: 0.5em;
+  background-color: #333;
+  position: sticky;
+  top: 0;
+}
+
+.blogs-column-container {
+  background-color: aliceblue;
+  text-align: left;
+  max-height: 80vh;
+  overflow: scroll;
+}
+.blogs-column-container h2.h2{
+ text-align: center;
+}
+
+.read-blog{
+  padding: 1rem;
+}
+.read-blog h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.read-blog p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 1rem;
+ 
+}
+.date-span{
+  font-size: 0.8em;
+  font-weight: bolder;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+.profile .user-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.profile .user-container h2{
+  display: none;
+}
+.profile .user-container .prof-container {
+  background-color: #646cff;
+  width: 400px;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -89,4 +164,145 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.container {
+  width: 300px;
+  height: 320px;
+  background-color: #343541;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  width: 100%;
+  height: 40px;
+  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-bar a {
+  color: #6B6C7B;
+  white-space: nowrap;
+  margin-left: 10px;
+  user-select: none;
+}
+
+.close {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.line {
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  background-color: #6B6C7B;
+  border-radius: 30px;
+}
+
+.line.one {
+  transform: rotate(45deg)
+}
+
+.line.two {
+  transform: rotate(135deg)
+}
+
+.messages-area {
+  background-color: green;
+  width: 100%;
+  height: 210px;
+}
+
+.sender-area {
+  background-color: #343541;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  border-radius: 8px;
+}
+
+.message {
+  width: 100%;
+  height: 40px;
+}
+
+.message.one,
+.message.three,
+.message.five {
+  background-color: #2E2F3A;
+}
+
+.message.two,
+.message.four,
+.message.six {
+  background-color: #343541;
+}
+
+.send-img {
+  width: 30px;
+}
+
+.send-input {
+  outline: none;
+  display: flex;
+  border: none;
+  background: none;
+  height: 40px;
+  width: 230px;
+  border-radius: 7px;
+  background: none;
+  color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 5px;
+}
+
+.send-input::placeholder {
+  color: #828E9E;
+}
+
+.input-place {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  margin-left: 10px;
+  align-items: center;
+  background-color: #40414F;
+  border-radius: 7px;
+  height: 40px;
+  width: 280px;
+  gap: 5px;
+  border: 1px solid #2E2F3A;
+}
+
+.send {
+  width: 30px;
+  height: 30px;
+  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.send-icon {
+  width: 17px;
+}
+
+
+.profile-prof {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem 0.5em;
 }

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import http from '../lib/http'
 import './SignupForm.css';
 
 
 const SignupForm = () => {
-    const {register, handleSubmit} =  useForm()
+    const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
 
     const [firstName, setFirstName] = useState('');
@@ -15,47 +15,71 @@ const SignupForm = () => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('user');
     const [signup, setSignup] = useState(true)
+    const [error, setError] = useState('')
 
-   
+
 
     const onSubmitSignUp = async ({ firstName, lastName, email, password, role }) => {
-        let user
-        if(role) {
-            user = 'professional'
-        } else {
-            user='user'
-        }
-        const payload = {
+        try {
+          let user;
+          if (role) {
+            user = 'professional';
+          } else {
+            user = 'user';
+          }
+          const payload = {
             firstName,
             lastName,
             email,
             password,
             roles: user
+          };
+          const res = await http.post("/api/signup", {
+            data: payload,
+            credentials: 'include'
+          });
+          const data = res.data;
+          console.log(data.newUser._id);
+          // Display the response to the user
+          alert("Sign up successful!");
+          navigate(`/dash/${data.newUser._id}`)
+        } catch (error) {
+          console.error(error);
+          // Display an error message to the user
+          alert("Email already in use", error);
         }
-        
-        await http.post('/api/signup', {data: payload})
-        // Perform form submission logic here
-        // Reset form fields
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPassword('');
-        setRoles('')
-    };
-    const onSubmitLogin = async ({email, password}) => {
-        const payload = {
+      };
+      const onSubmitLogin = async ({ email, password }) => {
+        try {
+          const payload = {
             email,
             password
+          };
+          console.log(payload);
+          const res = await http.post("/api/login", {
+            data: payload,
+            credentials: 'include'
+          });
+          console.log(res);
+          const data = res.data
+          navigate(`/dash/${data.user._id}`)
+          // Handle successful login response here
+        } catch (error) {
+          console.error(error);
+          // Display the error message to the user
+          let errorMessage = "Invalid credentals";
+       
+          alert(errorMessage);
         }
-        console.log(payload);
-        await http.post('/api/login', {data: payload})
-        // Perform form submission logic here
-        console.log('Form submitted:', { firstName, lastName, email, password });
-        // Reset form fields
-        setEmail('');
-        setPassword('');
-        
-    };
+      };
+    const changePswd = async ({ newpassword }) => {
+        const payload = {
+            newpassword,
+            token: localStorage.getItem('token')
+        }
+
+        const result = await http.post('/api/recover', { data: payload })
+    }
     /* const handleFirstNameChange = (e) => {
         setFirstName(e.target.value);
     };
@@ -71,8 +95,8 @@ const SignupForm = () => {
     const handleRolesChange = (e) => {
         if (role) {
             setRole('professional');
-        }else {
-            setRole('user') ;
+        } else {
+            setRole('user');
         }
     };
     const toggle = () => {
@@ -82,6 +106,7 @@ const SignupForm = () => {
         <div>
             <form className="form" onSubmit={handleSubmit(onSubmitSignUp)}>
                 <p className="title">Register</p>
+                <p>{error}</p>
                 <p className="message">Signup now and get full access to our app.</p>
                 <div className="flex">
                     <label>
@@ -138,10 +163,10 @@ const SignupForm = () => {
                         type="checkbox"
                         name="professional"
                         id="professional"
-                       /*  checked={role === 'professional'} */
+                        /*  checked={role === 'professional'} */
                         onChange={handleRolesChange}
                         {...register("role")}
-                        
+
                     />
                     <span className="professional">Are you a professional?</span>
                 </label>
@@ -156,26 +181,26 @@ const SignupForm = () => {
     ) : <form onSubmit={handleSubmit(onSubmitLogin)} className="form-login">
         <p className="title">Sign in to your account</p>
         <div className="login-input-container">
-            <input 
-            type="email" 
-            /* value={email}  */
-            name='email' 
-            /* onChange={handleEmailChange}  */
-            placeholder="Enter email"
-            {...register("email")}
+            <input
+                type="email"
+                /* value={email}  */
+                name='email'
+                /* onChange={handleEmailChange}  */
+                placeholder="Enter email"
+                {...register("email")}
             />
             <span>
             </span>
         </div>
         <div className="login-input-container">
-            <input 
-            type="password" 
-            /* value={password} */
-             name='password'
-            /* onChange={handlePasswordChange}  */
-            placeholder="Enter password"
-            {...register('password')}
-             />
+            <input
+                type="password"
+                /* value={password} */
+                name='password'
+                /* onChange={handlePasswordChange}  */
+                placeholder="Enter password"
+                {...register('password')}
+            />
         </div>
         <button type="submit" className="login-submit">
             Sign in

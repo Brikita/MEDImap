@@ -6,6 +6,7 @@
   
   .form-container {
     max-width: 700px;
+    max-height: fit-content;
     margin: 30px;
     background-color: #001925;
     padding: 30px;
@@ -103,6 +104,8 @@
 
 .create-blog-page {
     display: flex;
-    background-color: #ff7a01;
+    background-color: aliceblue;
+    height: 80vh;
+
 }
  

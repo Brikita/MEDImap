@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path='/dash/*' element={<App />} />
+          <Route path='/dash/:id/*' element={<App />} />
          <Route path='/' element={<Home />} />
 
         </Routes>

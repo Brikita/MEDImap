@@ -1,16 +1,17 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './User.css'
 
 import { useSelector } from 'react-redux'
 import { selectUsersById } from './userApiSlice'
 
-const User = ({ userId }) => {
-    const user = useSelector(state => selectUsersById(state, userId))
+const User = ({ profId }) => {
+    const {id: userId} = useParams()
+    const user = useSelector(state => selectUsersById(state, profId))
     const navigate = useNavigate()
-    console.log(user);
+    
 
-    const handleNavigate = () => navigate(`/profile/view/${userId}`)
+    const handleNavigate = () => location.assign(`/dash/${userId}/view/${profId}`)
 
     return (
         <div className='prof-container'>
