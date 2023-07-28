@@ -1,6 +1,7 @@
 
 import { useGetBlogsQuery } from "./blogsApiSlice";
 import ViewBlogs from "./ViewBlogs";
+import Spinner from "../../components/Spinner";
 
 
 import React from 'react'
@@ -15,7 +16,7 @@ const Blogs = () => {
     } = useGetBlogsQuery()
 
     let content
-    if (isLoading) content = <p>Loading....</p>
+    if (isLoading) content = <div className="spinner"><Spinner /></div>
 
     if(isError) content = <p>{error}</p>
 
