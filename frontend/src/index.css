@@ -97,6 +97,10 @@ h1.home-H1 {
  text-align: center;
 }
 
+.blogs-column-container .spinner {
+  align-self: center;
+}
+
 .read-blog{
   padding: 1rem;
 }
@@ -306,3 +310,101 @@ button:focus-visible {
   grid-template-columns: 1fr 1fr;
   margin: 1rem 0.5em;
 }
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feedback-section p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.card-feedback {
+  align-self: center;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-feedback {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.group {
+  position: relative;
+}
+
+.form-feedback .group label {
+  font-size: 14px;
+  color: rgb(99, 102, 102);
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: #fff;
+  transition: all .3s ease;
+}
+
+.form-feedback .group input,
+.form-feedback .group textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  outline: 0;
+  width: 100%;
+  background-color: transparent;
+}
+
+.form-feedback .group input:placeholder-shown+ label, .form-feedback .group textarea:placeholder-shown +label {
+  top: 10px;
+  background-color: transparent;
+}
+
+.form-feedback .group input:focus,
+.form-feedback .group textarea:focus {
+  border-color: #3366cc;
+}
+
+.form-feedback .group input:focus+ label, .form-feedback .group textarea:focus +label {
+  top: -10px;
+  left: 10px;
+  background-color: #fff;
+  color: #3366cc;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-feedback .group textarea {
+  resize: none;
+  height: 100px;
+}
+
+.form-feedback button {
+  background-color: #3366cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-feedback button:hover {
+  background-color: #27408b;
+}
+
