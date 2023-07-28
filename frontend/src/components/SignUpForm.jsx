@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import http from '../lib/http'
 import './SignupForm.css';
+import Spinner from './Spinner';
 
 
 const SignupForm = () => {
@@ -16,10 +17,12 @@ const SignupForm = () => {
     const [role, setRole] = useState('user');
     const [signup, setSignup] = useState(true)
     const [error, setError] = useState('')
+    const [isLoading, setIsLoading] = useState('')
 
 
 
     const onSubmitSignUp = async ({ firstName, lastName, email, password, role }) => {
+       setIsLoading(true)
         try {
           let user;
           if (role) {
@@ -42,33 +45,38 @@ const SignupForm = () => {
           console.log(data.newUser._id);
           // Display the response to the user
           alert("Sign up successful!");
+          setIsLoading(false)
           navigate(`/dash/${data.newUser._id}`)
         } catch (error) {
-          console.error(error);
-          // Display an error message to the user
-          alert("Email already in use", error);
+            console.error(error);
+            // Display an error message to the user
+            setIsLoading(false)
+            alert("Email already in use", error);
         }
       };
       const onSubmitLogin = async ({ email, password }) => {
+        setIsLoading(true)
         try {
-          const payload = {
-            email,
-            password
-          };
-          console.log(payload);
-          const res = await http.post("/api/login", {
-            data: payload,
-            credentials: 'include'
-          });
-          console.log(res);
-          const data = res.data
-          navigate(`/dash/${data.user._id}`)
-          // Handle successful login response here
+            const payload = {
+                email,
+                password
+            };
+            console.log(payload);
+            const res = await http.post("/api/login", {
+                data: payload,
+                credentials: 'include'
+            });
+            console.log(res);
+            const data = res.data
+            setIsLoading(false)
+            navigate(`/dash/${data.user._id}`)
+            // Handle successful login response here
         } catch (error) {
-          console.error(error);
-          // Display the error message to the user
-          let errorMessage = "Invalid credentals";
-       
+            console.error(error);
+            // Display the error message to the user
+            let errorMessage = "Invalid credentals";
+            
+            setIsLoading(false)
           alert(errorMessage);
         }
       };
@@ -176,6 +184,7 @@ const SignupForm = () => {
                 <p className="signin">
                     Already have an account? <span className='toggle' onClick={toggle}>Sign in</span>
                 </p>
+            {isLoading && <Spinner />}
             </form>
         </div>
     ) : <form onSubmit={handleSubmit(onSubmitLogin)} className="form-login">
@@ -210,6 +219,7 @@ const SignupForm = () => {
             No account?
             <span className='toggle' onClick={toggle}>Sign up</span>
         </p>
+        {isLoading && <div><Spinner /> <h3>Please Wait a moment...</h3></div>}
     </form>
 
     return content
