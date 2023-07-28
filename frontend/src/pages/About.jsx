@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import http from '../lib/http'
 
 const About = () => {
+  const { handleSubmit, register } = useForm()
+
+
+  const onSubmit = async ({ name, email, content }) => {
+    const payload = { name, email, content }
+
+    const res = await http.post('/api/feedback', {data: payload})
+
+
+
+  }
+
+
   return (
     <div>
       <Header />
@@ -17,17 +32,17 @@ const About = () => {
         <h4>Your Feedback is valuable to us. Please consider leaving a message</h4>
         <div className="card-feedback">
           <span className="title">Leave a Comment</span>
-          <form className="form-feedback">
+          <form className="form-feedback" onSubmit={handleSubmit(onSubmit)}>
             <div className="group">
-              <input placeholder="‎" type="text" required="" />
+              <input placeholder="‎" type="text" required="" {...register('name')} />
               <label for="name">Name</label>
             </div>
             <div className="group">
-              <input placeholder="‎" type="email" id="email" name="email" required="" />
+              <input placeholder="‎" type="email" id="email" name="email" required="" {...register('email')} />
               <label for="email">Email</label>
             </div>
             <div className="group">
-              <textarea placeholder="‎" id="comment" name="comment" rows="5" required=""></textarea>
+              <textarea placeholder="‎" id="comment" name="comment" rows="5" required="" {...register('content')}></textarea>
               <label for="comment">Comment</label>
             </div>
             <button type="submit">Submit</button>
