@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Professionals from '../../features/user/Professionals'
 import http from '../../lib/http'
 import Chat from '../../components/Chat'
@@ -27,7 +27,9 @@ const profile = () => {
 
           <h2>{user && user.email}</h2>
 
+
           <h3>Institution: </h3>
+          <Link to={`/dash/${userId}`}><h4>Back Home</h4></Link>
         </div>
         <div>
           <Chat />
