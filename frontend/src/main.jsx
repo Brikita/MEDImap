@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { store } from './app/store.jsx'
 import { Provider } from 'react-redux'
 import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
 
 import './index.css'
 
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path='/dash/:id/*' element={<App />} />
          <Route path='/' element={<Home />} />
+         <Route path='/about' element={<About />} />
 
         </Routes>
       </BrowserRouter>
