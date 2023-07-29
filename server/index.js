@@ -9,6 +9,7 @@ const app = express();
 const connectDB = require('./DB/connectDB');
 const blogRoutes = require('./Routes/blogsRoutes');
 const userRoutes = require('./Routes/usersRoutes');
+const feedbackRoute = require('./Routes/feedback')
 const User = require('./Models/Users.js')
 // Connect to the database
 connectDB();
@@ -43,6 +44,7 @@ const requireAuth = asyncHandler(async(req, res, next) => {
   }
 })
 // Routes
+app.use('/api', feedbackRoute);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/users', userRoutes);
 
@@ -53,6 +55,11 @@ const createToken = (id) => {
     process.env.JWT_SECRET,
     { expiresIn: expTime })
 }
+
+app.get('/', (req, res) => {
+  res.send({message: "Welcome to Brian's API"})
+})
+
 app.post('/api/signup', async (req, res) => {
   try {
     const { firstName, lastName, email, password, roles } = req.body;
