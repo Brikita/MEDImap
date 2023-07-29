@@ -30,7 +30,7 @@ const Professionals = () => {
 
     }
 
-    const container = <div className='user-container'><h2>Seek Help From Professionals</h2>{content}</div>
+    const container = <div className='user-container'><h2 className='offscreen'>Seek Help From Professionals</h2>{content}</div>
     return container
   
 }

@@ -9,7 +9,9 @@ const Home = () => {
     <div>
       <h1 className='home-H1'>WELCOME. IT'S Ok NOT to BE <strong>OK!</strong> </h1>
       <div className='home-container'>
-        <div><Professionals /></div>
+        <div>
+          <h2>Seek help from professionals</h2>
+          <Professionals /></div>
         <div className='blogs-column-container'>
           <div> </div>
           <h2 className='h2'>Read These Interesting Articles to calm your Mind or <Link to={`/dash/${userId}/new`}><span>create one</span></Link></h2>

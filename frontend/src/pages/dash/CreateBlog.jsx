@@ -37,6 +37,7 @@ const CreateBlog = () => {
                         value={userId}
                         type="text"
                         className="input"
+                        disabled={true}
                         {...register('author')}
                         
                     />
@@ -44,6 +45,7 @@ const CreateBlog = () => {
                         placeholder="Title"
                         id="title"
                         type="text"
+                        required
                        /*  value={title} */
                         name='title'
                         className="input"
@@ -55,6 +57,7 @@ const CreateBlog = () => {
                         rows="40"
                         cols="100"
                         id="content"
+                        required
                        /*  value={content} */
                         name="content"
                         className="textarea"
@@ -71,17 +74,13 @@ const CreateBlog = () => {
                             <div
                                 id="reset-btn"
                                 className="reset-button"
-                                onClick={()=>navigate(`/dash/${userId}`)}
+                                onClick={()=>location.assign(`/dash/${userId}`)}
                             >Back</div>
                         </div>
                     </div>
                 </div>
             </form>
-            <div className='img-div'>
-                <h1>
-                    Under Construction!!!
-                </h1>
-               </div>
+        
         </div>
     )
 }
