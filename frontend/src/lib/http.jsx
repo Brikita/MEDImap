@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const domain =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000";
+  "https://mediserver.onrender.com";
 
 const http = (url, { method = "GET", data = undefined }) => {
   return axios({

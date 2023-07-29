@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://mediserver.onrender.com/api' }),
     tagTypes: ['Blog', 'User'],
     endpoints: builder => ({}),
 })

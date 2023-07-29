@@ -24,7 +24,7 @@ const ReadBlog = () => {
      const fetchUser = async () => {
       try {
         const response = await Axios.get(
-          `http://localhost:5000/api/users/user/${blog.author}`
+          `https://mediserver.onrender.com/api/users/user/${blog.author}`
         );
         if (isMounted) {
           setAuthor(response.data);
